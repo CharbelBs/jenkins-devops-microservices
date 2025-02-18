@@ -24,7 +24,7 @@ pipeline {
 
   stages {
 
-     stage("Build Test"){
+     stage("Checkout"){
         steps{
 
            sh 'mvn --version'
@@ -36,16 +36,24 @@ pipeline {
 
      }
 
-     stage("UI Test"){
+     stage("Compile"){
              steps{
 
-                echo "UI Test"
+                sh "mvn clean compile"
              }
       }
+
+      stage("Test"){
+                   steps{
+
+                      sh "mvn test"
+                   }
+            }
+
      stage("Integration Test"){
              steps{
 
-                echo "Build Test"
+                echo "mvn failsafe:integration-test failsafe:verify"
              }
       }
   }
