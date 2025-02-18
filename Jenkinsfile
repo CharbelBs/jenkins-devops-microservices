@@ -12,12 +12,9 @@ node {
 // Declarative Pipelines
 
 pipeline {
-    //agent any
-    agent {
-        docker {
-            image 'maven:3.6.3'
-        }
-    }
+    agent any
+    //agent { docker { image 'maven:3.6.3' } }
+
 
 
   stages {
@@ -25,7 +22,7 @@ pipeline {
      stage("Build Test"){
         steps{
 
-           bat 'mvn --version'
+           sh 'mvn --version'
            echo "Build Test"
         }
 
