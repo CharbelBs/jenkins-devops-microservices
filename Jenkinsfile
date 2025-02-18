@@ -13,7 +13,13 @@ node {
 
 pipeline {
     //agent any
-    agent { docker { image 'maven:3.6.3' args '--workdir /usr/src/app' } }
+    agent {
+        docker {
+            image 'maven:3.6.3'
+            args '--workdir /usr/src/app'
+        }
+    }
+
 
   stages {
 
