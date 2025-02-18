@@ -79,7 +79,7 @@ pipeline {
                          steps{
 
                             script{
-                              docker.withRegistry("","dockerHub"){
+                              docker.withRegistry("https://index.docker.io/v1/","dockerHub"){
                                dockerImage.push();
                                dockerImage.push('latest');
                               }
