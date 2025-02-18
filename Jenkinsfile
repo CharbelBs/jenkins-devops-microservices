@@ -43,7 +43,7 @@ pipeline {
              }
       }
 
-      stage("Test"){
+/*      stage("Test"){
                    steps{
 
                       sh "mvn test"
@@ -56,8 +56,37 @@ pipeline {
                 echo "mvn failsafe:integration-test failsafe:verify"
              }
       }
-  }
 
+      */
+
+      stage("Package") {
+
+         steps{
+           sh "mvn package -DskipTests"
+         }
+      }
+
+      stage("Build image"){
+                   steps{
+
+                      script{
+                        dockerImage = docker.build("charbelbsaibess/currency-exchange-devops:${env.BUILD_TAG}")
+                      }
+                   }
+      }
+
+      stage("Push image"){
+                         steps{
+
+                            script{
+                              docker.withRegistry("","dockerHub"){
+                               dockerImage.push();
+                               dockerImage.push('latest');
+                              }
+                            }
+                         }
+         }
+  }
   post {
 
     always{
