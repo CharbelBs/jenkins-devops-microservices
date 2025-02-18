@@ -1,16 +1,3 @@
-/* Sripted Pipelines
-node {
-	stage('Build') {
-		echo "Build"
-	}
-	stage('Test') {
-		echo "Test"
-	}
-}
-*/
-
-// Declarative Pipelines
-
 node {
 
   stages {
